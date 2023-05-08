@@ -15,6 +15,7 @@ source('functions.R')
 #https://shiny.rstudio.com/articles/layout-guide.html
 
 
+
 # base --------------------------------------------------------------------
 
 
@@ -26,6 +27,9 @@ source('functions.R')
 #   div(plotlyOutput('data_plot', width = '60%', height='800px'),align="center")
 # 
 # )
+
+
+
 
 
 
@@ -46,7 +50,30 @@ source('functions.R')
 #     )
 #   )
 # )
+
+
+
 # 
+# ui <- fluidPage(
+# 
+#   sidebarLayout(
+#     sidebarPanel(
+#       uiOutput('my_ticker'),
+#       dateRangeInput('my_date',label = 'Date', start = '2018-01-01', end = Sys.Date())
+# 
+#     ),
+#     mainPanel(
+#       
+#       
+#       
+#       # plotlyOutput('data_plot', width = '60%', height='800px'),
+#       # dataTableOutput('my_data')
+#     )
+#   )
+# )
+
+
+
 
 
 
@@ -158,7 +185,7 @@ ui <-dashboardPage(
   dashboardSidebar(
     uiOutput('my_ticker'),
     dateRangeInput('my_date',label = 'Date', start = '2018-01-01', end = Sys.Date()),
-    
+
     sidebarMenu(
     menuItem("Plot", tabName = "plot", icon = icon("dashboard")),
     menuItem("Data", tabName = "data", icon = icon("th"))
@@ -169,7 +196,7 @@ ui <-dashboardPage(
   dashboardBody(
     tabItems(
       tabItem(tabName = "plot",
-             
+
               plotlyOutput('data_plot')
       ),
 
@@ -215,7 +242,7 @@ server <- function(input, output, session) {
   output$my_data <- DT::renderDT(server = F,{
     render_df_with_all_download_buttons(my_reactive_df())
   })
- 
+
   output$data_plot <- renderPlotly({
     get_plot_of_data(my_reactive_df())
   })
