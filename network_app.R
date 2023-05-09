@@ -47,6 +47,7 @@ server <- function(input, output, session) {
                   units = "TWh", fontSize = 12, nodeWidth = 30)
   })
   
+  
 }
 
 shinyApp(ui, server)
